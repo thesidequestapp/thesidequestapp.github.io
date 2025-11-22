@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIDEQUEST | The Fun One</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts: Space Mono (Tech/Raw) and Archivo Black (Heavy/Bold) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-bg: #f0f0f0;
+            --color-text: #1a1a1a;
+            --color-accent-1: #ccff00; /* Acid Lime */
+            --color-accent-2: #ff00ff; /* Hot Magenta */
+            --color-accent-3: #00ffff; /* Cyan */
+            --border-thick: 3px solid #000;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: 'Space Mono', monospace;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .display-font {
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* Brutalist Utilities */
+        .brutal-box {
+            background: white;
+            border: 3px solid black;
+            box-shadow: 6px 6px 0px 0px black;
+            transition: all 0.1s ease;
+        }
+
+        .brutal-box:hover {
+            box-shadow: 2px 2px 0px 0px black;
+            transform: translate(4px, 4px);
+        }
+
+        .brutal-btn {
+            background: var(--color-accent-1);
+            border: 3px solid black;
+            box-shadow: 4px 4px 0px 0px black;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.75rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .brutal-btn:hover {
+            background: white;
+            box-shadow: 1px 1px 0px 0px black;
+            transform: translate(3px, 3px);
+        }
+
+        .brutal-btn.secondary {
+            background: white;
+        }
+        .brutal-btn.secondary:hover {
+            background: var(--color-accent-2);
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            background: black;
+            color: white;
+            border-top: 3px solid black;
+            border-bottom: 3px solid black;
+            padding: 1rem 0;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Grid Pattern Background */
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, #00000010 1px, transparent 1px),
+                linear-gradient(to bottom, #00000010 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .stamp {
+            mix-blend-mode: multiply;
+            animation: stamp-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: scale(2) rotate(15deg);
+        }
+
+        @keyframes stamp-in {
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(-5deg);
+            }
+        }
+
+        .glitch-hover:hover {
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-left: 3px solid black;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-accent-2);
+            border: 3px solid black;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #000;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="border-b-4 border-black bg-white sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-stretch min-h-[80px]">
+            <div class="flex items-center px-6 bg-black text-white">
+                <span class="text-3xl font-black tracking-tighter glitch-hover cursor-pointer">SIDEQUEST</span>
+            </div>
+            <div class="hidden md:flex border-l-4 border-black flex-1 justify-end">
+                <a href="#explore" class="flex items-center px-8 hover:bg-[#ccff00] hover:font-bold border-r-4 border-black transition-colors text-lg">EXPLORE</a>
+                <a href="#host" class="flex items-center px-8 hover:bg-[#ff00ff] hover:text-white hover:font-bold border-r-4 border-black transition-colors text-lg">HOST</a>
+                <a href="#passport" class="flex items-center px-8 hover:bg-[#00ffff] hover:font-bold border-r-4 border-black transition-colors text-lg">PASSPORT</a>
+                <div class="flex items-center px-8 bg-gray-100 cursor-pointer hover:bg-black hover:text-white transition-colors">
+                    LOGIN
+                </div>
+            </div>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden flex items-center px-6 border-l-4 border-black bg-[var(--color-accent-1)]">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="grid-bg relative border-b-4 border-black">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[85vh]">
+            
+            <!-- Hero Left: Text -->
+            <div class="lg:col-span-7 p-8 flex flex-col justify-center border-b-4 lg:border-b-0 lg:border-r-4 border-black bg-white relative overflow-hidden">
+                <div class="absolute top-0 left-0 bg-black text-white px-4 py-1 font-bold text-xs uppercase">
+                    v1.0.0 // Beta Access
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl leading-[0.9] mb-6">
+                    NOT THE <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600 stroke-black" style="-webkit-text-stroke: 2px black;">MAIN QUEST</span><br>
+                    <span class="text-[var(--color-accent-2)]">THE FUN ONE</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl mb-8 font-bold border-l-8 border-[var(--color-accent-1)] pl-6 py-2">
+                    Run Clubs. Supper Clubs. Random 3AM Hiking Guilds. <br>
+                    Unlock your city, one sidequest at a time.
+                </p>
+                
+                <div class="flex flex-col md:flex-row gap-4">
+                    <button class="brutal-btn text-xl">
+                        START QUESTING <i data-lucide="arrow-right"></i>
+                    </button>
+                    <button class="brutal-btn secondary text-xl">
+                        CREATE GUILD
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hero Right: Visuals -->
+            <div class="lg:col-span-5 bg-[var(--color-accent-3)] p-8 flex flex-col relative">
+                <!-- Decorative Elements -->
+                <div class="absolute top-4 right-4 w-16 h-16 bg-black rounded-full flex items-center justify-center text-white animate-spin-slow">
+                    <i data-lucide="star" class="w-8 h-8"></i>
+                </div>
+
+                <!-- Card Stack Effect -->
+                <div class="mt-auto mb-auto relative w-full aspect-[4/5]">
+                    <div class="absolute inset-0 bg-white border-4 border-black rotate-3 z-10 flex flex-col">
+                        <div class="h-1/2 bg-cover bg-center border-b-4 border-black" style="background-image: url('https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');">
+                            <div class="bg-[var(--color-accent-1)] inline-block m-2 px-2 py-1 border-2 border-black font-bold text-xs">SWIM CLUB</div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col justify-between">
+                            <h3 class="text-2xl">Neon Night Swim</h3>
+                            <div class="flex justify-between items-end">
+                                <div class="text-sm font-bold">
+                                    <div>XP: +50</div>
+                                    <div>LOC: City Pool</div>
+                                </div>
+                                <button class="bg-black text-white px-4 py-2 font-bold hover:bg-[var(--color-accent-2)]">JOIN</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-black -rotate-2 translate-x-2 translate-y-2 z-0"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Marquee -->
+    <div class="marquee-container">
+        <div class="marquee-content text-4xl font-black">
+            RUN CLUBS /// SUPPER CLUBS /// HIKING GUILDS /// ART JAMS /// ROOFTOP YOGA /// MIDNIGHT CYCLING /// BOARD GAME WARS /// RUN CLUBS /// SUPPER CLUBS /// HIKING GUILDS /// ART JAMS /// ROOFTOP YOGA /// MIDNIGHT CYCLING /// BOARD GAME WARS ///
+        </div>
+    </div>
+
+    <!-- What is Sidequest? -->
+    <section id="explore" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Concept 1 -->
+            <div class="brutal-box p-6 bg-[#ff90e8]">
+                <div class="border-b-4 border-black pb-4 mb-4 flex justify-between items-start">
+                    <h2 class="text-4xl">01</h2>
+                    <i data-lucide="map" class="w-12 h-12"></i>
+                </div>
+                <h3 class="text-2xl mb-2">DISCOVER GUILDS</h3>
+                <p class="font-bold">Stop scrolling, start doing. Find local micro-communities that match your vibe. From serious marathon training to "I just run for the bagel" groups.</p>
+            </div>
+
+            <!-- Concept 2 -->
+            <div class="brutal-box p-6 bg-[#fff500]">
+                <div class="border-b-4 border-black pb-4 mb-4 flex justify-between items-start">
+                    <h2 class="text-4xl">02</h2>
+                    <i data-lucide="calendar" class="w-12 h-12"></i>
+                </div>
+                <h3 class="text-2xl mb-2">DROP IN</h3>
+                <p class="font-bold">No long-term contracts. Just book a slot, show up, and have fun. Filter by vibe, intensity, and post-event snacks.</p>
+            </div>
+
+            <!-- Concept 3 -->
+            <div class="brutal-box p-6 bg-[#00ff94]">
+                <div class="border-b-4 border-black pb-4 mb-4 flex justify-between items-start">
+                    <h2 class="text-4xl">03</h2>
+                    <i data-lucide="award" class="w-12 h-12"></i>
+                </div>
+                <h3 class="text-2xl mb-2">EARN BADGES</h3>
+                <p class="font-bold">Gamify your social life. Every event attended adds a unique digital stamp to your Sidequest Passport. Share your loot on Strava.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Split: Host vs User -->
+    <section class="border-t-4 border-black">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            
+            <!-- For Users -->
+            <div class="p-10 md:p-20 bg-white border-b-4 md:border-b-0 md:border-r-4 border-black flex flex-col justify-center relative overflow-hidden group">
+                <div class="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]"></div>
+                <h2 class="text-5xl mb-6 relative z-10">FOR <br><span class="text-[var(--color-accent-2)] bg-black px-2">PLAYERS</span></h2>
+                <ul class="space-y-4 text-xl font-bold relative z-10 mb-8">
+                    <li class="flex items-center gap-3"><i data-lucide="check-square"></i> Curated Events Feed</li>
+                    <li class="flex items-center gap-3"><i data-lucide="check-square"></i> One-Click Signups</li>
+                    <li class="flex items-center gap-3"><i data-lucide="check-square"></i> Digital Passport</li>
+                    <li class="flex items-center gap-3"><i data-lucide="check-square"></i> Leaderboards</li>
+                </ul>
+                <button class="brutal-btn w-fit relative z-10">BROWSE QUESTS</button>
+            </div>
+
+            <!-- For Hosts -->
+            <div class="p-10 md:p-20 bg-black text-white flex flex-col justify-center relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4">
+                    <i data-lucide="crown" class="w-24 h-24 text-gray-800 rotate-12"></i>
+                </div>
+                <h2 class="text-5xl mb-6 text-[var(--color-accent-1)]">FOR <br>GUILD MASTERS</h2>
+                <p class="text-gray-400 mb-6 font-mono">Managing a run club via Instagram DM is hell. Use Sidequest.</p>
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="border-2 border-white p-4 hover:bg-white hover:text-black transition-colors">
+                        <h4 class="font-bold mb-1">PAYMENTS</h4>
+                        <p class="text-xs opacity-70">Collect dues easily.</p>
+                    </div>
+                    <div class="border-2 border-white p-4 hover:bg-white hover:text-black transition-colors">
+                        <h4 class="font-bold mb-1">ANALYTICS</h4>
+                        <p class="text-xs opacity-70">Know your crowd.</p>
+                    </div>
+                    <div class="border-2 border-white p-4 hover:bg-white hover:text-black transition-colors">
+                        <h4 class="font-bold mb-1">CHECK-IN</h4>
+                        <p class="text-xs opacity-70">QR Code entry.</p>
+                    </div>
+                    <div class="border-2 border-white p-4 hover:bg-white hover:text-black transition-colors">
+                        <h4 class="font-bold mb-1">TOOLS</h4>
+                        <p class="text-xs opacity-70">Waivers & more.</p>
+                    </div>
+                </div>
+                <button class="brutal-btn secondary w-fit">CREATE COMMUNITY</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- The PASSPORT Section (Gamification) -->
+    <section id="passport" class="py-20 bg-[#f0f0f0] relative border-b-4 border-black overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute top-10 left-10 opacity-20 text-9xl font-black select-none">LEVEL UP</div>
+        
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                
+                <!-- Text Side -->
+                <div class="md:w-1/2">
+                    <h2 class="text-6xl mb-6">YOUR <br><span class="text-[var(--color-accent-2)]" style="-webkit-text-stroke: 2px black; color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke-width: 2px;">PASSPORT</span></h2>
+                    <p class="text-xl mb-6 font-bold">Life is a game. Collect the receipts.</p>
+                    <p class="mb-8 font-mono">Every event you attend unlocks a unique stamp for your digital passport. Complete sets (e.g., "The 5k Enthusiast" or "The Foodie Weekender") to unlock exclusive perks from our brand partners.</p>
+                    
+                    <div class="bg-white border-4 border-black p-6 max-w-md shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                        <div class="flex items-center gap-4 mb-4">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-16 h-16 border-2 border-black rounded-none bg-yellow-200">
+                            <div>
+                                <h4 class="font-bold text-xl">PLAYER ONE</h4>
+                                <p class="text-sm text-gray-500">Lvl 12 Explorer</p>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-200 h-4 border-2 border-black mb-2">
+                            <div class="bg-[var(--color-accent-2)] h-full w-3/4"></div>
+                        </div>
+                        <div class="flex justify-between text-xs font-bold">
+                            <span>XP: 4500</span>
+                            <span>NEXT: 5000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Passport Visual -->
+                <div class="md:w-1/2 w-full flex justify-center">
+                    <div class="bg-[#f4eec7] w-full max-w-md aspect-[3/4] border-4 border-black relative shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] p-6 rotate-1">
+                        <!-- Passport Header -->
+                        <div class="border-b-2 border-black/20 pb-2 mb-4 flex justify-between items-center">
+                            <span class="font-mono text-sm opacity-50">SIDEQUEST_ID_9928</span>
+                            <i data-lucide="globe" class="opacity-50"></i>
+                        </div>
+
+                        <!-- Stamp Grid -->
+                        <div class="grid grid-cols-3 gap-4 h-full content-start" id="stamp-grid">
+                            <!-- Stamps will be injected here via JS for effect, but hardcoding some for initial load -->
+                            <div class="aspect-square border-2 border-dashed border-black/30 rounded-full flex items-center justify-center text-black/20 hover:border-solid hover:bg-white/50 transition-all cursor-pointer group relative" onclick="addStamp(this)">
+                                <span class="text-xs text-center group-hover:hidden">Click to Stamp</span>
+                                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                                    <div class="w-16 h-16 rounded-full border-4 border-red-600 text-red-600 font-bold text-[10px] flex items-center justify-center rotate-[-12deg] uppercase tracking-widest" style="border-style: double;">RUN CLUB<br>NYC</div>
+                                </div>
+                            </div>
+                            <!-- Pre-filled stamp -->
+                            <div class="aspect-square flex items-center justify-center">
+                                <div class="w-20 h-20 rounded-full border-4 border-blue-600 text-blue-600 font-bold text-[10px] flex items-center justify-center rotate-12 uppercase tracking-widest bg-blue-100/50" style="border-style: double; mix-blend-mode: multiply;">
+                                    SUPPER<br>CLUB
+                                </div>
+                            </div>
+                             <div class="aspect-square flex items-center justify-center">
+                                <div class="w-20 h-20 rounded-full border-4 border-green-600 text-green-600 font-bold text-[10px] flex items-center justify-center rotate-[-5deg] uppercase tracking-widest bg-green-100/50" style="border-style: double; mix-blend-mode: multiply;">
+                                    HIKING<br>GUILD
+                                </div>
+                            </div>
+                            
+                             <div class="aspect-square border-2 border-dashed border-black/30 rounded-full flex items-center justify-center text-black/20 hover:border-solid hover:bg-white/50 transition-all cursor-pointer group" onclick="addStamp(this)">
+                                <span class="text-xs text-center group-hover:hidden">Empty</span>
+                            </div>
+                             <div class="aspect-square border-2 border-dashed border-black/30 rounded-full flex items-center justify-center text-black/20 hover:border-solid hover:bg-white/50 transition-all cursor-pointer group" onclick="addStamp(this)">
+                                <span class="text-xs text-center group-hover:hidden">Empty</span>
+                            </div>
+                             <div class="aspect-square border-2 border-dashed border-black/30 rounded-full flex items-center justify-center text-black/20 hover:border-solid hover:bg-white/50 transition-all cursor-pointer group" onclick="addStamp(this)">
+                                <span class="text-xs text-center group-hover:hidden">Empty</span>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Share -->
+                        <div class="absolute bottom-4 right-4">
+                             <button class="bg-blue-600 text-white text-xs font-bold px-2 py-1 border-2 border-black hover:bg-blue-500 shadow-[2px_2px_0px_0px_black]">SHARE TO STRAVA</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Feed / Upcoming Events -->
+    <section class="py-20 px-4 bg-[var(--color-accent-1)] border-b-4 border-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-end mb-10 border-b-4 border-black pb-4">
+                <h2 class="text-5xl">QUEST BOARD</h2>
+                <div class="hidden md:block font-mono font-bold">LOCATION: LONDON, UK</div>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <!-- Event Row 1 -->
+                <div class="bg-white border-4 border-black p-4 flex flex-col md:flex-row items-start md:items-center justify-between hover:translate-x-2 transition-transform cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <div class="bg-black text-white p-3 font-bold text-center min-w-[70px]">
+                            <div class="text-xs">OCT</div>
+                            <div class="text-2xl">12</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold uppercase">Sunday Runday & Coffee</h3>
+                            <div class="flex gap-2 text-sm mt-1">
+                                <span class="bg-gray-200 px-2 border border-black">5KM</span>
+                                <span class="bg-gray-200 px-2 border border-black">Chill Pace</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex items-center gap-6 w-full md:w-auto justify-between">
+                        <div class="flex -space-x-2">
+                            <img class="w-8 h-8 rounded-full border-2 border-white bg-gray-300" src="https://api.dicebear.com/7.x/avataaars/svg?seed=1" alt="">
+                            <img class="w-8 h-8 rounded-full border-2 border-white bg-gray-300" src="https://api.dicebear.com/7.x/avataaars/svg?seed=2" alt="">
+                            <img class="w-8 h-8 rounded-full border-2 border-white bg-gray-300" src="https://api.dicebear.com/7.x/avataaars/svg?seed=3" alt="">
+                            <div class="w-8 h-8 rounded-full border-2 border-white bg-black text-white flex items-center justify-center text-xs font-bold">+12</div>
+                        </div>
+                        <button class="brutal-btn text-sm py-2">JOIN $0</button>
+                    </div>
+                </div>
+
+                 <!-- Event Row 2 -->
+                <div class="bg-white border-4 border-black p-4 flex flex-col md:flex-row items-start md:items-center justify-between hover:translate-x-2 transition-transform cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <div class="bg-black text-white p-3 font-bold text-center min-w-[70px]">
+                            <div class="text-xs">OCT</div>
+                            <div class="text-2xl">14</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold uppercase">Midnight Cycling Guild</h3>
+                            <div class="flex gap-2 text-sm mt-1">
+                                <span class="bg-gray-200 px-2 border border-black">20KM</span>
+                                <span class="bg-[var(--color-accent-2)] text-white px-2 border border-black">Night</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex items-center gap-6 w-full md:w-auto justify-between">
+                        <div class="flex -space-x-2">
+                            <img class="w-8 h-8 rounded-full border-2 border-white bg-gray-300" src="https://api.dicebear.com/7.x/avataaars/svg?seed=4" alt="">
+                            <img class="w-8 h-8 rounded-full border-2 border-white bg-gray-300" src="https://api.dicebear.com/7.x/avataaars/svg?seed=5" alt="">
+                            <div class="w-8 h-8 rounded-full border-2 border-white bg-black text-white flex items-center justify-center text-xs font-bold">+40</div>
+                        </div>
+                        <button class="brutal-btn text-sm py-2">JOIN $5</button>
+                    </div>
+                </div>
+
+                 <!-- Event Row 3 -->
+                <div class="bg-white border-4 border-black p-4 flex flex-col md:flex-row items-start md:items-center justify-between hover:translate-x-2 transition-transform cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <div class="bg-black text-white p-3 font-bold text-center min-w-[70px]">
+                            <div class="text-xs">OCT</div>
+                            <div class="text-2xl">15</div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold uppercase">Secret Pasta Club</h3>
+                            <div class="flex gap-2 text-sm mt-1">
+                                <span class="bg-gray-200 px-2 border border-black">Food</span>
+                                <span class="bg-[var(--color-accent-3)] px-2 border border-black">Social</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex items-center gap-6 w-full md:w-auto justify-between">
+                        <div class="flex -space-x-2">
+                            <img class="w-8 h-8 rounded-full border-2 border-white bg-gray-300" src="https://api.dicebear.com/7.x/avataaars/svg?seed=8" alt="">
+                            <div class="w-8 h-8 rounded-full border-2 border-white bg-black text-white flex items-center justify-center text-xs font-bold">+8</div>
+                        </div>
+                        <button class="brutal-btn text-sm py-2">JOIN $25</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-20 px-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+                <h2 class="text-6xl mb-4">SIDEQUEST</h2>
+                <p class="font-mono text-gray-400 max-w-md mb-8">The main quest is working 9-5. The side quest is everything else that makes life worth living. Join the resistance against boredom.</p>
+                
+                <div class="flex gap-4">
+                    <a href="#" class="w-12 h-12 border-2 border-white flex items-center justify-center hover:bg-white hover:text-black transition-colors"><i data-lucide="instagram"></i></a>
+                    <a href="#" class="w-12 h-12 border-2 border-white flex items-center justify-center hover:bg-white hover:text-black transition-colors"><i data-lucide="twitter"></i></a>
+                    <a href="#" class="w-12 h-12 border-2 border-white flex items-center justify-center hover:bg-white hover:text-black transition-colors"><i data-lucide="youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="flex flex-col justify-end">
+                <h3 class="text-2xl mb-4 font-bold">GET THE APP</h3>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="border-2 border-white px-6 py-3 flex items-center gap-3 hover:bg-white hover:text-black transition-colors">
+                        <i data-lucide="apple"></i> APP STORE
+                    </button>
+                    <button class="border-2 border-white px-6 py-3 flex items-center gap-3 hover:bg-white hover:text-black transition-colors">
+                        <i data-lucide="play-circle"></i> GOOGLE PLAY
+                    </button>
+                </div>
+                
+                <div class="mt-12 pt-8 border-t border-gray-800 text-sm font-mono text-gray-500 flex flex-col md:flex-row justify-between">
+                    <p>&copy; 2023 SIDEQUEST INC.</p>
+                    <div class="flex gap-4 mt-2 md:mt-0">
+                        <a href="#" class="hover:text-white">PRIVACY</a>
+                        <a href="#" class="hover:text-white">TERMS</a>
+                        <a href="#" class="hover:text-white">CONTACT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Simple Stamp Interaction Logic
+        function addStamp(element) {
+            // If already stamped, do nothing
+            if(element.querySelector('.stamped-content')) return;
+
+            const colors = ['text-purple-600', 'text-orange-600', 'text-pink-600'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            const labels = ['YOGA<br>FLOW', 'CYCLING<br>GANG', 'CHESS<br>MATE'];
+            const randomLabel = labels[Math.floor(Math.random() * labels.length)];
+            const rotation = Math.floor(Math.random() * 20) - 10;
+
+            element.innerHTML = `
+                <div class="stamped-content w-20 h-20 rounded-full border-4 border-current ${randomColor} font-bold text-[10px] flex items-center justify-center uppercase tracking-widest stamp bg-white/50" style="border-style: double; transform: rotate(${rotation}deg);">
+                    ${randomLabel}
+                </div>
+            `;
+            
+            // Reset border styles
+            element.classList.remove('border-dashed');
+            element.style.border = 'none';
+        }
+    </script>
+</body>
+</html>
