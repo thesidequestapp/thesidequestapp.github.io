@@ -181,7 +181,8 @@
                 <a href="#explore" class="flex items-center px-8 hover:bg-[#ccff00] hover:font-bold border-r-4 border-black transition-colors text-lg">PLAYERS</a>
                 <a href="#host" class="flex items-center px-8 hover:bg-[#ff00ff] hover:text-white hover:font-bold border-r-4 border-black transition-colors text-lg">GUILD MASTERS</a>
                 <a href="#passport" class="flex items-center px-8 hover:bg-[#00ffff] hover:font-bold border-r-4 border-black transition-colors text-lg">PASSPORT</a>
-                <div class="flex items-center px-8 bg-gray-100 cursor-pointer hover:bg-black hover:text-white transition-colors">
+                <!-- Updated Login Button with Click Handler -->
+                <div onclick="toggleWaitlist(true)" class="flex items-center px-8 bg-gray-100 cursor-pointer hover:bg-black hover:text-white transition-colors">
                     LOGIN
                 </div>
             </div>
@@ -214,10 +215,11 @@
                 </p>
                 
                 <div class="flex flex-col md:flex-row gap-6">
-                    <button class="brutal-btn text-xl md:text-2xl px-8 py-4">
+                    <!-- Added onclick triggers here -->
+                    <button onclick="toggleWaitlist(true)" class="brutal-btn text-xl md:text-2xl px-8 py-4">
                         START QUESTING <i data-lucide="arrow-right"></i>
                     </button>
-                    <button class="brutal-btn secondary text-xl md:text-2xl px-8 py-4">
+                    <button onclick="toggleWaitlist(true)" class="brutal-btn secondary text-xl md:text-2xl px-8 py-4">
                         CREATE GUILD
                     </button>
                 </div>
@@ -288,7 +290,8 @@
                             Managing a run club via Instagram DM is hell. Use Sidequest to handle payments, waivers, and check-ins while you focus on the vibes.
                         </p>
                     </div>
-                    <button class="brutal-btn secondary text-black shadow-white text-xl px-8 py-4 whitespace-nowrap">
+                    <!-- Added onclick trigger here -->
+                    <button onclick="toggleWaitlist(true)" class="brutal-btn secondary text-black shadow-white text-xl px-8 py-4 whitespace-nowrap">
                         CREATE COMMUNITY
                     </button>
                 </div>
@@ -400,12 +403,12 @@
                                 </svg>
                             </div>
                             
-                            <!-- Pre-filled stamp 3: Serrated/Burst -->
+                            <!-- Pre-filled stamp 3: Triangle (Replacing Serrated/Burst) -->
                             <div class="aspect-square flex items-center justify-center">
                                 <svg viewBox="0 0 100 100" class="w-24 h-24 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] transform -rotate-2 transition-transform hover:scale-110 duration-200 cursor-pointer">
-                                    <path d="M50 5 L63 35 L95 35 L70 55 L80 85 L50 65 L20 85 L30 55 L5 35 L37 35 Z" fill="#00ffff" stroke="black" stroke-width="3" />
-                                    <text x="50" y="55" font-family="Archivo Black" font-size="9" text-anchor="middle" fill="black">URBAN</text>
-                                    <text x="50" y="65" font-family="Archivo Black" font-size="9" text-anchor="middle" fill="black">EXPLORER</text>
+                                    <path d="M50 10 L90 90 L10 90 Z" fill="#00ffff" stroke="black" stroke-width="3" />
+                                    <text x="50" y="60" font-family="Archivo Black" font-size="9" text-anchor="middle" fill="black">URBAN</text>
+                                    <text x="50" y="75" font-family="Archivo Black" font-size="9" text-anchor="middle" fill="black">EXPLORER</text>
                                 </svg>
                             </div>
 
@@ -438,7 +441,8 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-end mb-10 border-b-4 border-black pb-4">
                 <h2 class="text-5xl">QUEST BOARD</h2>
-                <div class="hidden md:block font-mono font-bold">LOCATION: LONDON, UK</div>
+                <!-- Updated Location -->
+                <div class="hidden md:block font-mono font-bold">LOCATION: BENGALURU, INDIA</div>
             </div>
 
             <div class="flex flex-col gap-4">
@@ -464,7 +468,8 @@
                             <img class="w-8 h-8 rounded-full border-2 border-white bg-gray-300" src="https://api.dicebear.com/7.x/avataaars/svg?seed=3" alt="">
                             <div class="w-8 h-8 rounded-full border-2 border-white bg-black text-white flex items-center justify-center text-xs font-bold">+12</div>
                         </div>
-                        <button class="brutal-btn text-sm py-2">JOIN $0</button>
+                        <!-- Added onclick trigger -->
+                        <button onclick="toggleWaitlist(true)" class="brutal-btn text-sm py-2">JOIN $0</button>
                     </div>
                 </div>
 
@@ -489,7 +494,8 @@
                             <img class="w-8 h-8 rounded-full border-2 border-white bg-gray-300" src="https://api.dicebear.com/7.x/avataaars/svg?seed=5" alt="">
                             <div class="w-8 h-8 rounded-full border-2 border-white bg-black text-white flex items-center justify-center text-xs font-bold">+40</div>
                         </div>
-                        <button class="brutal-btn text-sm py-2">JOIN $5</button>
+                        <!-- Added onclick trigger -->
+                        <button onclick="toggleWaitlist(true)" class="brutal-btn text-sm py-2">JOIN $5</button>
                     </div>
                 </div>
 
@@ -513,7 +519,8 @@
                             <img class="w-8 h-8 rounded-full border-2 border-white bg-gray-300" src="https://api.dicebear.com/7.x/avataaars/svg?seed=8" alt="">
                             <div class="w-8 h-8 rounded-full border-2 border-white bg-black text-white flex items-center justify-center text-xs font-bold">+8</div>
                         </div>
-                        <button class="brutal-btn text-sm py-2">JOIN $25</button>
+                        <!-- Added onclick trigger -->
+                        <button onclick="toggleWaitlist(true)" class="brutal-btn text-sm py-2">JOIN $25</button>
                     </div>
                 </div>
             </div>
@@ -537,10 +544,11 @@
             <div class="flex flex-col justify-end">
                 <h3 class="text-2xl mb-4 font-bold">GET THE APP</h3>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <button class="border-2 border-white px-6 py-3 flex items-center gap-3 hover:bg-white hover:text-black transition-colors">
+                    <!-- Updated Buttons with Click Handlers -->
+                    <button onclick="toggleWaitlist(true)" class="border-2 border-white px-6 py-3 flex items-center gap-3 hover:bg-white hover:text-black transition-colors">
                         <i data-lucide="apple"></i> APP STORE
                     </button>
-                    <button class="border-2 border-white px-6 py-3 flex items-center gap-3 hover:bg-white hover:text-black transition-colors">
+                    <button onclick="toggleWaitlist(true)" class="border-2 border-white px-6 py-3 flex items-center gap-3 hover:bg-white hover:text-black transition-colors">
                         <i data-lucide="play-circle"></i> GOOGLE PLAY
                     </button>
                 </div>
@@ -557,50 +565,115 @@
         </div>
     </footer>
 
+    <!-- Waitlist Modal -->
+    <div id="waitlist-modal" class="fixed inset-0 bg-black/95 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white border-4 border-[var(--color-accent-1)] p-8 md:p-12 max-w-2xl w-full relative shadow-[8px_8px_0px_0px_var(--color-accent-1)] animate-in fade-in zoom-in duration-300">
+            <button onclick="toggleWaitlist(false)" class="absolute top-4 right-4 p-2 hover:bg-black hover:text-white border-2 border-transparent hover:border-black transition-colors">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            
+            <h2 class="text-5xl md:text-7xl mb-6 text-black tracking-tighter">COMING <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-2)] to-purple-600" style="-webkit-text-stroke: 2px black;">SOON</span></h2>
+            
+            <p class="text-xl font-bold mb-8 font-mono border-l-8 border-black pl-4">
+                We are currently in closed beta with select guilds in Bengaluru. 
+                Drop your email to get early access when we launch in your city.
+            </p>
+
+            <form onsubmit="handleWaitlist(event)" class="flex flex-col gap-4">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <input type="email" placeholder="ENTER YOUR EMAIL" required 
+                        class="flex-1 bg-gray-100 border-4 border-black p-4 font-mono text-lg focus:outline-none focus:bg-[var(--color-accent-1)] placeholder-gray-500 transition-colors">
+                    <button type="submit" class="brutal-btn text-xl whitespace-nowrap justify-center h-full">
+                        NOTIFY ME <i data-lucide="bell"></i>
+                    </button>
+                </div>
+                <p class="text-xs font-mono text-gray-500 mt-2">* No spam. Only epic quests.</p>
+            </form>
+
+            <!-- Success Message (Overlay) -->
+            <div id="waitlist-success" class="hidden absolute inset-0 bg-white flex flex-col items-center justify-center text-center p-8 z-10">
+                <div class="rounded-full border-4 border-black p-4 bg-[var(--color-accent-1)] mb-6 shadow-[4px_4px_0px_0px_black]">
+                    <i data-lucide="check" class="w-16 h-16 text-black stroke-[3px]"></i>
+                </div>
+                <h3 class="text-4xl font-black mb-2 uppercase">You're on the list</h3>
+                <p class="font-mono text-xl mb-8">We'll ping you when the quest begins.</p>
+                <button onclick="toggleWaitlist(false)" class="brutal-btn w-full justify-center">RETURN TO BASE</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Initialize Icons
         lucide.createIcons();
 
-        // Brutalist Stamp Generator
+        // Global state to track what's currently on the board (including pre-filled)
+        const usedConcepts = new Set(['WEEKEND', 'NIGHT', 'URBAN']); 
+        // We use IDs for shapes to track usage: 'octagon', 'circle', 'triangle' are already used
+        const usedShapes = new Set(['octagon', 'circle', 'triangle']);
+
+        // Definition of all possible shapes
+        const allShapes = [
+            { id: 'octagon', path: 'M30,5 L70,5 L95,30 L95,70 L70,95 L30,95 L5,70 L5,30 Z', type: 'path', fontSize: 12 },
+            { id: 'circle', type: 'circle', cx: 50, cy: 50, r: 45, fontSize: 13 },
+            { id: 'triangle', path: 'M50 10 L90 90 L10 90 Z', type: 'path', fontSize: 9, textY1: 60, textY2: 75 },
+            { id: 'square', type: 'rect', x: 10, y: 10, width: 80, height: 80, fontSize: 12 },
+            { id: 'hexagon', path: 'M5 25 L50 5 L95 25 L95 75 L50 95 L5 75 Z', type: 'path', fontSize: 11 }, // Flat-ish top hexagon
+            { id: 'shield', path: 'M10 10 L90 10 L90 50 Q50 100 10 50 Z', type: 'path', fontSize: 10, textY1: 35, textY2: 50 }
+        ];
+
+        // Definition of all possible concepts
+        const allConcepts = [
+            { label1: 'COFFEE', label2: 'RUN', color: '#fff500', text: 'black' },
+            { label1: 'ART', label2: 'CRAWL', color: '#ff90e8', text: 'black' },
+            { label1: 'BOARD', label2: 'GAME', color: '#00ff94', text: 'black' },
+            { label1: 'FOODIE', label2: 'TREK', color: '#ffffff', text: 'black' },
+            { label1: 'YOGA', label2: 'FLOW', color: '#ff4d4d', text: 'black' }, // Red
+            { label1: 'BOOK', label2: 'CLUB', color: '#4d94ff', text: 'black' }, // Blue
+            { label1: 'TECH', label2: 'TALK', color: '#ccff00', text: 'black' }, // Lime
+            { label1: 'CHESS', label2: 'MATE', color: '#b3b3b3', text: 'black' }  // Grey
+        ];
+
         function addStamp(element) {
             // If already stamped, do nothing
             if(element.querySelector('svg')) return;
 
-            const shapes = [
-                // Octagon
-                { path: 'M30,5 L70,5 L95,30 L95,70 L70,95 L30,95 L5,70 L5,30 Z', type: 'path', fontSize: 12 },
-                // Circle
-                { type: 'circle', cx: 50, cy: 50, r: 45, fontSize: 13 },
-                // Star/Burst
-                { path: 'M50 5 L63 35 L95 35 L70 55 L80 85 L50 65 L20 85 L30 55 L5 35 L37 35 Z', type: 'path', fontSize: 9 }
-            ];
+            // 1. Filter available options
+            let availableShapes = allShapes.filter(s => !usedShapes.has(s.id));
+            let availableConcepts = allConcepts.filter(c => !usedConcepts.has(c.label1));
 
-            const configs = [
-                { label1: 'COFFEE', label2: 'RUN', color: '#fff500', text: 'black' },
-                { label1: 'ART', label2: 'CRAWL', color: '#ff90e8', text: 'black' },
-                { label1: 'BOARD', label2: 'GAME', color: '#00ff94', text: 'black' },
-                { label1: 'FOODIE', label2: 'TREK', color: '#ffffff', text: 'black' }
-            ];
+            // Fallback: If we run out of unique shapes/concepts, reset the pool (allows reuse if user stamps A LOT)
+            if (availableShapes.length === 0) {
+                usedShapes.clear(); // Reset history
+                availableShapes = allShapes; 
+            }
+            if (availableConcepts.length === 0) {
+                usedConcepts.clear(); // Reset history
+                availableConcepts = allConcepts;
+            }
 
-            const shape = shapes[Math.floor(Math.random() * shapes.length)];
-            const config = configs[Math.floor(Math.random() * configs.length)];
+            // 2. Randomly select from the filtered unique pool
+            const shape = availableShapes[Math.floor(Math.random() * availableShapes.length)];
+            const config = availableConcepts[Math.floor(Math.random() * availableConcepts.length)];
+            
+            // 3. Mark as used
+            usedShapes.add(shape.id);
+            usedConcepts.add(config.label1);
+
+            // 4. Render
             const rotation = Math.floor(Math.random() * 30) - 15;
 
-            // Build SVG String
             let svgContent = '';
             if (shape.type === 'circle') {
                 svgContent = `<circle cx="${shape.cx}" cy="${shape.cy}" r="${shape.r}" fill="${config.color}" stroke="black" stroke-width="3" />`;
+            } else if (shape.type === 'rect') {
+                svgContent = `<rect x="${shape.x}" y="${shape.y}" width="${shape.width}" height="${shape.height}" fill="${config.color}" stroke="black" stroke-width="3" />`;
             } else {
                 svgContent = `<path d="${shape.path}" fill="${config.color}" stroke="black" stroke-width="3" />`;
             }
 
-            // Adjust text position based on shape
-            let textY1 = 45;
-            let textY2 = 60;
-            if (shape.type === 'path' && shape.path.startsWith('M50 5')) { // Star adjustment
-                textY1 = 55;
-                textY2 = 65;
-            }
+            // Adjust text position based on shape specific overrides or defaults
+            let textY1 = shape.textY1 || 45; 
+            let textY2 = shape.textY2 || 60; 
 
             const svg = `
                 <svg viewBox="0 0 100 100" class="w-24 h-24 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] stamp transition-transform hover:scale-110 duration-200 cursor-pointer" style="transform: rotate(${rotation}deg);">
@@ -611,10 +684,45 @@
             `;
 
             element.innerHTML = svg;
-            
-            // Remove container styling to let SVG pop
             element.classList.remove('border-2', 'border-dashed', 'border-black/30', 'rounded-full', 'hover:bg-white/50');
             element.style.border = 'none';
+        }
+
+        // Waitlist Modal Logic
+        function toggleWaitlist(show) {
+            const modal = document.getElementById('waitlist-modal');
+            const successMsg = document.getElementById('waitlist-success');
+            
+            if (show) {
+                modal.classList.remove('hidden');
+                // Reset success state when reopening
+                if (!modal.dataset.success) {
+                    successMsg.classList.add('hidden');
+                }
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function handleWaitlist(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalContent = btn.innerHTML;
+            
+            // Loading State
+            btn.innerHTML = 'SENDING...';
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+            
+            // Simulate API call
+            setTimeout(() => {
+                document.getElementById('waitlist-success').classList.remove('hidden');
+                btn.innerHTML = originalContent;
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                e.target.reset(); // Clear form
+                
+                // Re-initialize icons for the new success message
+                lucide.createIcons();
+            }, 1000);
         }
     </script>
 </body>
