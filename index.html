@@ -55,6 +55,12 @@
             transform: translate(4px, 4px);
         }
 
+        /* Mobile Active State for Box */
+        .brutal-box:active {
+            box-shadow: 2px 2px 0px 0px black;
+            transform: translate(4px, 4px);
+        }
+
         .brutal-btn {
             background: var(--color-accent-1);
             border: 3px solid black;
@@ -67,9 +73,21 @@
             gap: 0.5rem;
             cursor: pointer;
             transition: all 0.1s;
+            /* Prevent sticky hover on mobile */
+            -webkit-tap-highlight-color: transparent; 
         }
 
-        .brutal-btn:hover {
+        /* Desktop Hover */
+        @media (hover: hover) {
+            .brutal-btn:hover {
+                background: white;
+                box-shadow: 1px 1px 0px 0px black;
+                transform: translate(3px, 3px);
+            }
+        }
+
+        /* Mobile/Touch Active State (Simulates Hover/Click) */
+        .brutal-btn:active {
             background: white;
             box-shadow: 1px 1px 0px 0px black;
             transform: translate(3px, 3px);
@@ -78,7 +96,14 @@
         .brutal-btn.secondary {
             background: white;
         }
-        .brutal-btn.secondary:hover {
+        
+        @media (hover: hover) {
+            .brutal-btn.secondary:hover {
+                background: var(--color-accent-2);
+            }
+        }
+        
+        .brutal-btn.secondary:active {
             background: var(--color-accent-2);
         }
 
@@ -86,7 +111,12 @@
         .shadow-white {
             box-shadow: 4px 4px 0px 0px white;
         }
-        .shadow-white:hover {
+        @media (hover: hover) {
+            .shadow-white:hover {
+                box-shadow: 1px 1px 0px 0px white;
+            }
+        }
+        .shadow-white:active {
             box-shadow: 1px 1px 0px 0px white;
         }
 
@@ -177,18 +207,38 @@
             <div class="flex items-center px-6 bg-black text-white">
                 <span class="text-3xl font-black tracking-tighter glitch-hover cursor-pointer">SIDEQUEST</span>
             </div>
+            
+            <!-- Desktop Menu -->
             <div class="hidden md:flex border-l-4 border-black flex-1 justify-end">
                 <a href="#explore" class="flex items-center px-8 hover:bg-[#ccff00] hover:font-bold border-r-4 border-black transition-colors text-lg">PLAYERS</a>
                 <a href="#host" class="flex items-center px-8 hover:bg-[#ff00ff] hover:text-white hover:font-bold border-r-4 border-black transition-colors text-lg">GUILD MASTERS</a>
                 <a href="#passport" class="flex items-center px-8 hover:bg-[#00ffff] hover:font-bold border-r-4 border-black transition-colors text-lg">PASSPORT</a>
-                <!-- Updated Login Button with Click Handler -->
                 <div onclick="toggleWaitlist(true)" class="flex items-center px-8 bg-gray-100 cursor-pointer hover:bg-black hover:text-white transition-colors">
                     LOGIN
                 </div>
             </div>
+
             <!-- Mobile Menu Button -->
-            <div class="md:hidden flex items-center px-6 border-l-4 border-black bg-[var(--color-accent-1)]">
+            <div class="md:hidden flex items-center px-6 border-l-4 border-black bg-[var(--color-accent-1)] cursor-pointer active:bg-white active:text-black transition-colors" onclick="toggleMobileMenu()">
                 <i data-lucide="menu" class="w-8 h-8"></i>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b-4 border-black animate-in slide-in-from-top-4 duration-200">
+            <div class="flex flex-col">
+                <a href="#explore" onclick="toggleMobileMenu()" class="p-6 border-b-4 border-black font-bold text-xl hover:bg-[#ccff00] active:bg-[#ccff00] flex justify-between items-center">
+                    PLAYERS <i data-lucide="arrow-right"></i>
+                </a>
+                <a href="#host" onclick="toggleMobileMenu()" class="p-6 border-b-4 border-black font-bold text-xl hover:bg-[#ff00ff] active:bg-[#ff00ff] flex justify-between items-center">
+                    GUILD MASTERS <i data-lucide="arrow-right"></i>
+                </a>
+                <a href="#passport" onclick="toggleMobileMenu()" class="p-6 border-b-4 border-black font-bold text-xl hover:bg-[#00ffff] active:bg-[#00ffff] flex justify-between items-center">
+                    PASSPORT <i data-lucide="arrow-right"></i>
+                </a>
+                <div onclick="toggleWaitlist(true); toggleMobileMenu()" class="p-6 font-bold text-xl bg-gray-100 active:bg-black active:text-white cursor-pointer flex justify-between items-center">
+                    LOGIN <i data-lucide="log-in"></i>
+                </div>
             </div>
         </div>
     </nav>
@@ -198,28 +248,28 @@
         <div class="max-w-7xl mx-auto min-h-[85vh] flex">
             
             <!-- Hero Text (Expanded to Full Width) -->
-            <div class="w-full p-10 md:p-24 flex flex-col justify-center bg-white relative overflow-hidden border-x-0 lg:border-x-4 border-black">
+            <div class="w-full p-6 sm:p-10 md:p-24 flex flex-col justify-center bg-white relative overflow-hidden border-x-0 lg:border-x-4 border-black">
                 <div class="absolute top-0 left-0 bg-black text-white px-4 py-1 font-bold text-xs uppercase">
                     v1.0.0 // Beta Access
                 </div>
                 
-                <h1 class="text-6xl md:text-9xl leading-[0.9] mb-8">
+                <!-- Adjusted font size for mobile compatibility -->
+                <h1 class="text-5xl sm:text-6xl md:text-9xl leading-[0.9] mb-8 break-words">
                     NOT THE <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600 stroke-black" style="-webkit-text-stroke: 2px black;">MAIN QUEST</span><br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600 stroke-black" style="-webkit-text-stroke: 1px black; -md-webkit-text-stroke: 2px black;">MAIN QUEST</span><br>
                     <span class="text-[var(--color-accent-2)]">THE FUN ONE</span>
                 </h1>
                 
-                <p class="text-xl md:text-3xl mb-12 font-bold border-l-8 border-[var(--color-accent-1)] pl-6 py-4 max-w-4xl">
+                <p class="text-lg md:text-3xl mb-12 font-bold border-l-8 border-[var(--color-accent-1)] pl-6 py-4 max-w-4xl">
                     Run Clubs. Supper Clubs. Random 3AM Hiking Guilds. <br>
                     Unlock your city, one sidequest at a time.
                 </p>
                 
-                <div class="flex flex-col md:flex-row gap-6">
-                    <!-- Added onclick triggers here -->
-                    <button onclick="toggleWaitlist(true)" class="brutal-btn text-xl md:text-2xl px-8 py-4">
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <button onclick="toggleWaitlist(true)" class="brutal-btn text-xl md:text-2xl px-8 py-4 justify-center">
                         START QUESTING <i data-lucide="arrow-right"></i>
                     </button>
-                    <button onclick="toggleWaitlist(true)" class="brutal-btn secondary text-xl md:text-2xl px-8 py-4">
+                    <button onclick="toggleWaitlist(true)" class="brutal-btn secondary text-xl md:text-2xl px-8 py-4 justify-center">
                         CREATE GUILD
                     </button>
                 </div>
@@ -236,7 +286,7 @@
 
     <!-- What is Sidequest? / FOR PLAYERS -->
     <section id="explore" class="py-20 px-4 max-w-7xl mx-auto">
-        <div class="flex justify-between items-end mb-10 border-b-4 border-black pb-4">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-10 border-b-4 border-black pb-4">
             <h2 class="text-5xl md:text-6xl">FOR <span class="text-[var(--color-accent-2)]">PLAYERS</span></h2>
             <div class="hidden md:block font-mono font-bold text-xl">/// START YOUR JOURNEY</div>
         </div>
@@ -290,8 +340,7 @@
                             Managing a run club via Instagram DM is hell. Use Sidequest to handle payments, waivers, and check-ins while you focus on the vibes.
                         </p>
                     </div>
-                    <!-- Added onclick trigger here -->
-                    <button onclick="toggleWaitlist(true)" class="brutal-btn secondary text-black shadow-white text-xl px-8 py-4 whitespace-nowrap">
+                    <button onclick="toggleWaitlist(true)" class="brutal-btn secondary text-black shadow-white text-xl px-8 py-4 whitespace-nowrap w-full md:w-auto justify-center">
                         CREATE COMMUNITY
                     </button>
                 </div>
@@ -344,14 +393,14 @@
     <!-- The PASSPORT Section (Gamification) -->
     <section id="passport" class="py-20 bg-[#f0f0f0] relative border-b-4 border-black overflow-hidden">
         <!-- Background decoration -->
-        <div class="absolute top-10 left-10 opacity-20 text-9xl font-black select-none">LEVEL UP</div>
+        <div class="absolute top-10 left-10 opacity-20 text-5xl md:text-9xl font-black select-none">LEVEL UP</div>
         
         <div class="max-w-6xl mx-auto px-4 relative z-10">
             <div class="flex flex-col md:flex-row gap-12 items-center">
                 
                 <!-- Text Side -->
-                <div class="md:w-1/2">
-                    <h2 class="text-6xl mb-6">YOUR <br><span class="text-[var(--color-accent-2)]" style="-webkit-text-stroke: 2px black; color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke-width: 2px;">PASSPORT</span></h2>
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-5xl md:text-6xl mb-6">YOUR <br><span class="text-[var(--color-accent-2)]" style="-webkit-text-stroke: 2px black; color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke-width: 2px;">PASSPORT</span></h2>
                     <p class="text-xl mb-6 font-bold">Life is a game. Collect the receipts.</p>
                     <p class="mb-8 font-mono">Every event you attend unlocks a unique stamp for your digital passport. Complete sets (e.g., "The 5k Enthusiast" or "The Foodie Weekender") to unlock exclusive perks from our brand partners.</p>
                     
@@ -374,20 +423,21 @@
                 </div>
 
                 <!-- Interactive Passport Visual -->
-                <div class="md:w-1/2 w-full flex justify-center">
-                    <div class="bg-[#f4eec7] w-full max-w-md aspect-[3/4] border-4 border-black relative shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] p-6 rotate-1">
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <!-- Adjusted width and scaling for mobile -->
+                    <div class="bg-[#f4eec7] w-full max-w-md aspect-[3/4] border-4 border-black relative shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] p-4 md:p-6 rotate-1">
                         <!-- Passport Header -->
                         <div class="border-b-2 border-black/20 pb-2 mb-4 flex justify-between items-center">
-                            <span class="font-mono text-sm opacity-50">SIDEQUEST_ID_9928</span>
+                            <span class="font-mono text-xs md:text-sm opacity-50">SIDEQUEST_ID_9928</span>
                             <i data-lucide="globe" class="opacity-50"></i>
                         </div>
 
                         <!-- Stamp Grid -->
-                        <div class="grid grid-cols-3 gap-4 h-full content-start" id="stamp-grid">
+                        <div class="grid grid-cols-3 gap-2 md:gap-4 h-full content-start" id="stamp-grid">
                             
                             <!-- Pre-filled stamp 1: Octagon -->
                             <div class="aspect-square flex items-center justify-center relative">
-                                <svg viewBox="0 0 100 100" class="w-24 h-24 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] transform -rotate-6 transition-transform hover:scale-110 duration-200 cursor-pointer">
+                                <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-24 md:h-24 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] transform -rotate-6 transition-transform hover:scale-110 duration-200 cursor-pointer">
                                     <path d="M30,5 L70,5 L95,30 L95,70 L70,95 L30,95 L5,70 L5,30 Z" fill="#ccff00" stroke="black" stroke-width="3" />
                                     <text x="50" y="45" font-family="Archivo Black" font-size="12" text-anchor="middle" fill="black">WEEKEND</text>
                                     <text x="50" y="60" font-family="Archivo Black" font-size="12" text-anchor="middle" fill="black">WARRIOR</text>
@@ -396,7 +446,7 @@
 
                             <!-- Pre-filled stamp 2: Circle -->
                             <div class="aspect-square flex items-center justify-center">
-                                <svg viewBox="0 0 100 100" class="w-24 h-24 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] transform rotate-3 transition-transform hover:scale-110 duration-200 cursor-pointer">
+                                <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-24 md:h-24 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] transform rotate-3 transition-transform hover:scale-110 duration-200 cursor-pointer">
                                     <circle cx="50" cy="50" r="45" fill="#ff00ff" stroke="black" stroke-width="3" />
                                     <text x="50" y="45" font-family="Archivo Black" font-size="13" text-anchor="middle" fill="white">NIGHT</text>
                                     <text x="50" y="60" font-family="Archivo Black" font-size="13" text-anchor="middle" fill="white">OWL</text>
@@ -405,7 +455,7 @@
                             
                             <!-- Pre-filled stamp 3: Triangle (Replacing Serrated/Burst) -->
                             <div class="aspect-square flex items-center justify-center">
-                                <svg viewBox="0 0 100 100" class="w-24 h-24 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] transform -rotate-2 transition-transform hover:scale-110 duration-200 cursor-pointer">
+                                <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-24 md:h-24 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] transform -rotate-2 transition-transform hover:scale-110 duration-200 cursor-pointer">
                                     <path d="M50 10 L90 90 L10 90 Z" fill="#00ffff" stroke="black" stroke-width="3" />
                                     <text x="50" y="60" font-family="Archivo Black" font-size="9" text-anchor="middle" fill="black">URBAN</text>
                                     <text x="50" y="75" font-family="Archivo Black" font-size="9" text-anchor="middle" fill="black">EXPLORER</text>
@@ -413,21 +463,21 @@
                             </div>
 
                             <!-- Empty Slots -->
-                            <div class="aspect-square border-2 border-dashed border-black/30 rounded-full flex items-center justify-center text-black/20 hover:border-solid hover:bg-white/50 transition-all cursor-pointer group" onclick="addStamp(this)">
-                                <span class="text-xs text-center group-hover:hidden">Click me</span>
+                            <div class="aspect-square border-2 border-dashed border-black/30 rounded-full flex items-center justify-center text-black/20 hover:border-solid hover:bg-white/50 transition-all cursor-pointer group active:bg-white/50" onclick="addStamp(this)">
+                                <span class="text-[10px] md:text-xs text-center group-hover:hidden">Click me</span>
                             </div>
-                             <div class="aspect-square border-2 border-dashed border-black/30 rounded-full flex items-center justify-center text-black/20 hover:border-solid hover:bg-white/50 transition-all cursor-pointer group" onclick="addStamp(this)">
-                                <span class="text-xs text-center group-hover:hidden">Click me</span>
+                             <div class="aspect-square border-2 border-dashed border-black/30 rounded-full flex items-center justify-center text-black/20 hover:border-solid hover:bg-white/50 transition-all cursor-pointer group active:bg-white/50" onclick="addStamp(this)">
+                                <span class="text-[10px] md:text-xs text-center group-hover:hidden">Click me</span>
                             </div>
-                             <div class="aspect-square border-2 border-dashed border-black/30 rounded-full flex items-center justify-center text-black/20 hover:border-solid hover:bg-white/50 transition-all cursor-pointer group" onclick="addStamp(this)">
-                                <span class="text-xs text-center group-hover:hidden">Click me</span>
+                             <div class="aspect-square border-2 border-dashed border-black/30 rounded-full flex items-center justify-center text-black/20 hover:border-solid hover:bg-white/50 transition-all cursor-pointer group active:bg-white/50" onclick="addStamp(this)">
+                                <span class="text-[10px] md:text-xs text-center group-hover:hidden">Click me</span>
                             </div>
                         </div>
 
                         <!-- Bottom Share -->
                         <div class="absolute bottom-4 right-4">
-                             <button class="bg-[#ff00ff] text-white text-xs font-bold px-3 py-2 border-2 border-black hover:bg-white hover:text-black shadow-[3px_3px_0px_0px_black] flex items-center gap-2 transition-all">
-                                <i data-lucide="instagram" class="w-4 h-4"></i> SHARE TO INSTAGRAM
+                             <button class="bg-[#ff00ff] text-white text-[10px] md:text-xs font-bold px-2 py-1 md:px-3 md:py-2 border-2 border-black hover:bg-white hover:text-black shadow-[3px_3px_0px_0px_black] active:shadow-none active:translate-x-[3px] active:translate-y-[3px] flex items-center gap-2 transition-all">
+                                <i data-lucide="instagram" class="w-3 h-3 md:w-4 md:h-4"></i> SHARE
                             </button>
                         </div>
                     </div>
@@ -439,15 +489,15 @@
     <!-- Live Feed / Upcoming Events -->
     <section class="py-20 px-4 bg-[var(--color-accent-1)] border-b-4 border-black">
         <div class="max-w-7xl mx-auto">
-            <div class="flex justify-between items-end mb-10 border-b-4 border-black pb-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 border-b-4 border-black pb-4">
                 <h2 class="text-5xl">QUEST BOARD</h2>
                 <!-- Updated Location -->
-                <div class="hidden md:block font-mono font-bold">LOCATION: BENGALURU, INDIA</div>
+                <div class="font-mono font-bold mt-4 md:mt-0">LOCATION: BENGALURU, INDIA</div>
             </div>
 
             <div class="flex flex-col gap-4">
                 <!-- Event Row 1 -->
-                <div class="bg-white border-4 border-black p-4 flex flex-col md:flex-row items-start md:items-center justify-between hover:translate-x-2 transition-transform cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <div class="bg-white border-4 border-black p-4 flex flex-col md:flex-row items-start md:items-center justify-between hover:translate-x-2 transition-transform cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-2">
                     <div class="flex items-center gap-4 w-full md:w-auto">
                         <div class="bg-black text-white p-3 font-bold text-center min-w-[70px]">
                             <div class="text-xs">OCT</div>
@@ -474,7 +524,7 @@
                 </div>
 
                  <!-- Event Row 2 -->
-                <div class="bg-white border-4 border-black p-4 flex flex-col md:flex-row items-start md:items-center justify-between hover:translate-x-2 transition-transform cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <div class="bg-white border-4 border-black p-4 flex flex-col md:flex-row items-start md:items-center justify-between hover:translate-x-2 transition-transform cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-2">
                     <div class="flex items-center gap-4 w-full md:w-auto">
                         <div class="bg-black text-white p-3 font-bold text-center min-w-[70px]">
                             <div class="text-xs">OCT</div>
@@ -500,7 +550,7 @@
                 </div>
 
                  <!-- Event Row 3 -->
-                <div class="bg-white border-4 border-black p-4 flex flex-col md:flex-row items-start md:items-center justify-between hover:translate-x-2 transition-transform cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <div class="bg-white border-4 border-black p-4 flex flex-col md:flex-row items-start md:items-center justify-between hover:translate-x-2 transition-transform cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-2">
                     <div class="flex items-center gap-4 w-full md:w-auto">
                         <div class="bg-black text-white p-3 font-bold text-center min-w-[70px]">
                             <div class="text-xs">OCT</div>
@@ -531,7 +581,7 @@
     <footer class="bg-black text-white py-20 px-4">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
-                <h2 class="text-6xl mb-4">SIDEQUEST</h2>
+                <h2 class="text-5xl md:text-6xl mb-4">SIDEQUEST</h2>
                 <p class="font-mono text-gray-400 max-w-md mb-8">The main quest is working 9-5. The side quest is everything else that makes life worth living. Join the resistance against boredom.</p>
                 
                 <div class="flex gap-4">
@@ -545,10 +595,10 @@
                 <h3 class="text-2xl mb-4 font-bold">GET THE APP</h3>
                 <div class="flex flex-col sm:flex-row gap-4">
                     <!-- Updated Buttons with Click Handlers -->
-                    <button onclick="toggleWaitlist(true)" class="border-2 border-white px-6 py-3 flex items-center gap-3 hover:bg-white hover:text-black transition-colors">
+                    <button onclick="toggleWaitlist(true)" class="border-2 border-white px-6 py-3 flex items-center gap-3 hover:bg-white hover:text-black transition-colors active:bg-white active:text-black">
                         <i data-lucide="apple"></i> APP STORE
                     </button>
-                    <button onclick="toggleWaitlist(true)" class="border-2 border-white px-6 py-3 flex items-center gap-3 hover:bg-white hover:text-black transition-colors">
+                    <button onclick="toggleWaitlist(true)" class="border-2 border-white px-6 py-3 flex items-center gap-3 hover:bg-white hover:text-black transition-colors active:bg-white active:text-black">
                         <i data-lucide="play-circle"></i> GOOGLE PLAY
                     </button>
                 </div>
@@ -572,7 +622,7 @@
                 <i data-lucide="x" class="w-8 h-8"></i>
             </button>
             
-            <h2 class="text-5xl md:text-7xl mb-6 text-black tracking-tighter">COMING <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-2)] to-purple-600" style="-webkit-text-stroke: 2px black;">SOON</span></h2>
+            <h2 class="text-5xl md:text-7xl mb-6 text-black tracking-tighter">COMING <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-2)] to-purple-600" style="-webkit-text-stroke: 1px black; -md-webkit-text-stroke: 2px black;">SOON</span></h2>
             
             <p class="text-xl font-bold mb-8 font-mono border-l-8 border-black pl-4">
                 We are currently in closed beta with select guilds in Bengaluru. 
@@ -605,6 +655,12 @@
     <script>
         // Initialize Icons
         lucide.createIcons();
+        
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
 
         // Global state to track what's currently on the board (including pre-filled)
         const usedConcepts = new Set(['WEEKEND', 'NIGHT', 'URBAN']); 
@@ -676,7 +732,7 @@
             let textY2 = shape.textY2 || 60; 
 
             const svg = `
-                <svg viewBox="0 0 100 100" class="w-24 h-24 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] stamp transition-transform hover:scale-110 duration-200 cursor-pointer" style="transform: rotate(${rotation}deg);">
+                <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-24 md:h-24 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] stamp transition-transform hover:scale-110 duration-200 cursor-pointer" style="transform: rotate(${rotation}deg);">
                     ${svgContent}
                     <text x="50" y="${textY1}" font-family="Archivo Black" font-size="${shape.fontSize}" text-anchor="middle" fill="${config.text}">${config.label1}</text>
                     <text x="50" y="${textY2}" font-family="Archivo Black" font-size="${shape.fontSize}" text-anchor="middle" fill="${config.text}">${config.label2}</text>
